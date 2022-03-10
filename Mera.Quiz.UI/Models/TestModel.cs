@@ -11,5 +11,10 @@ namespace Mera.Quiz.UI.Models
         public List<QuestionModel> QuestionList { get; set; }
         public UserModel UserName { get; set; }
         public int Score { get; set; }
+
+        public override string ToString()
+        {
+            return TestName;
+        }
     }
 }

@@ -48,5 +48,24 @@ namespace Mera.Quiz.UI.API_connection
         }
 
 
+        public static async Task<UserModel> RegisterUser(UserModel userModel)
+        {
+            string url = $"api/User/create";
+            string userjson = JsonConvert.SerializeObject(userModel);
+
+            var content = new StringContent(userjson, Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = await APIHandler.client.PostAsync(url, content))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var userLogin = await response.Content.ReadAsAsync<UserModel>();
+                    MessageBox.Show(userLogin.UserName);
+                    return userLogin;
+                }
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+
     }
 }

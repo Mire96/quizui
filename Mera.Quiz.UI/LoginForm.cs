@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,13 +22,33 @@ namespace Mera.Quiz.UI
 
         private async void loginbtn_ClickAsync(object sender, EventArgs e)
         {
-            UserModel user = new UserModel() { UserName = usernametxt.Text, Password = usernametxt.Text };
-            UserModel loggedInUser = await APICalls.LoginUser(user);
+            UserModel user = new UserModel() { UserName = usernametxt.Text, Password = passwordtxt.Text };
+            try
+            {
+                UserModel loggedInUser = await APICalls.LoginUser(user);
+                Session.GetInstance().LoginUser(loggedInUser);
+                this.Hide();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message);
+                
+            }
+            
         }
 
-        private void registerlbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private async void registerlbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            UserModel user = new UserModel() { UserName = usernametxt.Text, Password = passwordtxt.Text };
+            try
+            {
+                UserModel loggedInUser = await APICalls.RegisterUser(user);
+            }
+            catch (Exception except)
+            {
 
+                MessageBox.Show(except.Message); ;
+            }
         }
     }
 }
