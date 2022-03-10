@@ -44,5 +44,48 @@ namespace Mera.Quiz.UI.Forms
                 MessageBox.Show(except.Message);
             }
         }
+
+        private async void deleteTestBtn_ClickAsync(object sender, EventArgs e)
+        {
+            try
+            {
+                await APICalls.DeleteTest(this.testListBox.SelectedItem);
+                UpdateListBox();
+                
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message);
+            }
+        }
+
+        //Can't update list box state
+        private void UpdateListBox()
+        {
+            testListBox.Items.Remove(testListBox.SelectedItem);
+            var tempList = testListBox.Items;
+            testListBox.DataSource = null;
+            testListBox.DataSource = tempList;
+
+            
+        }
+
+        private void testListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(this.testListBox.SelectedItem != null)
+            {
+                this.deleteTestBtn.Enabled = true;
+            }
+            else
+            {
+                this.deleteTestBtn.Enabled = false;
+            }
+        }
+
+        private void addTestBtn_Click(object sender, EventArgs e)
+        {
+            CreateTestForm createTestForm = new CreateTestForm();
+            createTestForm.Show();
+        }
     }
 }

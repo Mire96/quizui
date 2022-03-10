@@ -47,6 +47,20 @@ namespace Mera.Quiz.UI.API_connection
             }
         }
 
+        internal static async Task DeleteTest(object selectedItem)
+        {
+            TestModel deleteTest = (TestModel)selectedItem;
+            string url = $"api/Test/{deleteTest.ID}";
+
+            using(HttpResponseMessage response = await APIHandler.client.DeleteAsync(url))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show($"{deleteTest} deleted successfully");
+                }
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
 
         public static async Task<UserModel> RegisterUser(UserModel userModel)
         {
@@ -62,6 +76,25 @@ namespace Mera.Quiz.UI.API_connection
                     var userLogin = await response.Content.ReadAsAsync<UserModel>();
                     MessageBox.Show(userLogin.UserName);
                     return userLogin;
+                }
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+
+        public static async Task<QuestionModel> ValidateQuestion(QuestionModel question)
+        {
+            string url = $"api/Question/validate";
+            string questionJson = JsonConvert.SerializeObject(question);
+
+            var content = new StringContent(questionJson, Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = await APIHandler.client.PostAsync(url, content))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    QuestionModel validatedQuestion = await response.Content.ReadAsAsync<QuestionModel>();
+                    MessageBox.Show("Question valid!");
+                    return validatedQuestion;
                 }
                 throw new Exception(response.ReasonPhrase);
             }

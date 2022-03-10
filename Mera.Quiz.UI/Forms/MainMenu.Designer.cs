@@ -53,6 +53,7 @@ namespace Mera.Quiz.UI.Forms
             this.addTestBtn.TabIndex = 1;
             this.addTestBtn.Text = "Add test";
             this.addTestBtn.UseVisualStyleBackColor = true;
+            this.addTestBtn.Click += new System.EventHandler(this.addTestBtn_Click);
             // 
             // updateTestBtn
             // 
@@ -65,12 +66,14 @@ namespace Mera.Quiz.UI.Forms
             // 
             // deleteTestBtn
             // 
+            this.deleteTestBtn.Enabled = false;
             this.deleteTestBtn.Location = new System.Drawing.Point(592, 300);
             this.deleteTestBtn.Name = "deleteTestBtn";
             this.deleteTestBtn.Size = new System.Drawing.Size(93, 31);
             this.deleteTestBtn.TabIndex = 3;
             this.deleteTestBtn.Text = "Delete test";
             this.deleteTestBtn.UseVisualStyleBackColor = true;
+            this.deleteTestBtn.Click += new System.EventHandler(this.deleteTestBtn_ClickAsync);
             // 
             // testListBox
             // 
@@ -80,7 +83,7 @@ namespace Mera.Quiz.UI.Forms
             this.testListBox.Name = "testListBox";
             this.testListBox.Size = new System.Drawing.Size(392, 284);
             this.testListBox.TabIndex = 4;
-            
+            this.testListBox.SelectedIndexChanged += new System.EventHandler(this.testListBox_SelectedIndexChanged);
             // 
             // MainMenu
             // 

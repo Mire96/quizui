@@ -46,6 +46,7 @@ namespace Mera.Quiz.UI
             this.usernametxt.Name = "usernametxt";
             this.usernametxt.Size = new System.Drawing.Size(147, 27);
             this.usernametxt.TabIndex = 0;
+            this.usernametxt.Text = "admin";
             // 
             // usernamelbl
             // 
@@ -72,6 +73,7 @@ namespace Mera.Quiz.UI
             this.passwordtxt.PasswordChar = '*';
             this.passwordtxt.Size = new System.Drawing.Size(147, 27);
             this.passwordtxt.TabIndex = 3;
+            this.passwordtxt.Text = "admin";
             // 
             // registerlbl
             // 
