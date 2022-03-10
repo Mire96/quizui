@@ -65,6 +65,7 @@ namespace Mera.Quiz.UI.Forms
             this.updateTestBtn.TabIndex = 2;
             this.updateTestBtn.Text = "Update test";
             this.updateTestBtn.UseVisualStyleBackColor = true;
+            this.updateTestBtn.Click += new System.EventHandler(this.updateTestBtn_Click);
             // 
             // deleteTestBtn
             // 
@@ -98,9 +99,10 @@ namespace Mera.Quiz.UI.Forms
             this.Controls.Add(this.addTestBtn);
             this.Controls.Add(this.takeTestBtn);
             this.Name = "MainMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainMenu";
             this.ResumeLayout(false);
-            this.StartPosition = FormStartPosition.CenterScreen;
+
         }
 
         #endregion
@@ -109,6 +111,6 @@ namespace Mera.Quiz.UI.Forms
         private System.Windows.Forms.Button addTestBtn;
         private System.Windows.Forms.Button updateTestBtn;
         private System.Windows.Forms.Button deleteTestBtn;
-        private System.Windows.Forms.ListBox testListBox;
+        public System.Windows.Forms.ListBox testListBox;
     }
 }

@@ -119,5 +119,24 @@ namespace Mera.Quiz.UI.API_connection
                 throw new Exception(response.ReasonPhrase);
             }
         }
+        //Refactor this code
+        internal static async Task<TestModel> UpdateTest(TestModel test)
+        {
+            string url = $"api/Test/{test.ID}";
+            string testjson = JsonConvert.SerializeObject(test);
+
+            var content = new StringContent(testjson, Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = await APIHandler.client.PutAsync(url, content))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    TestModel createdTest = await response.Content.ReadAsAsync<TestModel>();
+                    MessageBox.Show($"{createdTest.TestName} was created!");
+                    return createdTest;
+                }
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
     }
 }

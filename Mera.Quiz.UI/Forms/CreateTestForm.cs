@@ -18,6 +18,7 @@ namespace Mera.Quiz.UI.Forms
         private List<TextBox> answerTextList;
         private List<RadioButton> correctAnswerList;
         private List<Label> answerLabelList;
+        private TestModel testModel;
         private bool validQuestionCheck;
 
         public CreateTestForm()
@@ -27,6 +28,7 @@ namespace Mera.Quiz.UI.Forms
             answerTextList = new List<TextBox>();
             correctAnswerList = new List<RadioButton>();
             answerLabelList = new List<Label>();
+            testModel = null;
             QuestionListBox.DataSource = questionList;
 
             answerTextList.Add(this.answerTxt1);
@@ -34,8 +36,29 @@ namespace Mera.Quiz.UI.Forms
             answerLabelList.Add(this.answerLbl1);
         }
 
+        public CreateTestForm(object selectedItem)
+        {
+            //Convert selected test to TestModel
+            testModel = (TestModel)selectedItem;
+
+            InitializeComponent();
+            questionList = new List<QuestionModel>();
+            answerTextList = new List<TextBox>();
+            correctAnswerList = new List<RadioButton>();
+            answerLabelList = new List<Label>();
+            
+            answerTextList.Add(this.answerTxt1);
+            correctAnswerList.Add(this.correctAnswer1);
+            answerLabelList.Add(this.answerLbl1);
+
+            testNameTxt.Text = testModel.TestName;
+            questionList = testModel.QuestionList;
+            QuestionListBox.DataSource = questionList;
+        }
+
         private void addAnswerBtn_Click(object sender, EventArgs e)
         {
+            this.removeAnswerBtn.Enabled = true;
             this.answerNumber += 1;
             AddAnswerLabelDynamically();
             AddAnswerTextBoxDynamically();
@@ -123,6 +146,7 @@ namespace Mera.Quiz.UI.Forms
             questionTxt.Text = "";
             answerTxt1.Text = "";
             correctAnswer1.Checked = false;
+            removeAnswerBtn.Enabled = false;
             for (int i = answerNumber - 1; i > 0; i--)
             {
                 RemoveFromForm(i);
@@ -158,15 +182,16 @@ namespace Mera.Quiz.UI.Forms
 
         private void removeAnswerBtn_Click(object sender, EventArgs e)
         {
-            if(answerNumber <= 1)
-            {
-                MessageBox.Show("You can't remove all answers!");
-                return;
-            }
+            
             answerNumber -= 1;
             int position = answerNumber;
             RemoveFromForm(position);
-            
+            if (answerNumber <= 1)
+            {
+                this.removeAnswerBtn.Enabled = false;
+                return;
+            }
+
 
         }
 
@@ -174,16 +199,41 @@ namespace Mera.Quiz.UI.Forms
         private async void saveTestBtn_ClickAsync(object sender, EventArgs e)
         {
 
-            TestModel test = new TestModel()
-            {TestName = testNameTxt.Text, QuestionList = questionList };
-            try
+            if(testModel == null)
             {
-                TestModel createdTest = await APICalls.CreateTest(test);
+                TestModel test = new TestModel();
+                test.TestName = testNameTxt.Text;
+                test.QuestionList = questionList ;
+                try
+                {
+                    TestModel createdTest = await APICalls.CreateTest(test);
+                    Session.GetInstance().mainMenu.Show();
+                    await Session.GetInstance().mainMenu.PopulateTestListBoxAsync();
+                    this.Dispose();
+                }
+                catch (Exception except)
+                {
+                    MessageBox.Show(except.Message);
+                }
             }
-            catch (Exception except)
+            else
             {
-                MessageBox.Show(except.Message);
+                testModel.TestName = testNameTxt.Text;
+                testModel.QuestionList = questionList;
+
+                try
+                {
+                    TestModel createdTest = await APICalls.UpdateTest(testModel);
+                    
+                    this.Close();
+                }
+                catch (Exception except)
+                {
+
+                    MessageBox.Show(except.Message);
+                }
             }
+
         }
 
         private void QuestionListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,6 +274,24 @@ namespace Mera.Quiz.UI.Forms
                 answerTextList.ElementAt(i).Text = question.AnswerList.ElementAt(i).AnswerText;
                 correctAnswerList.ElementAt(i).Checked = question.AnswerList.ElementAt(i).isCorrect;
             }
+        }
+
+        private void deleteQuestionBtn_Click(object sender, EventArgs e)
+        {
+            if(QuestionListBox.SelectedItem != null)
+            {
+                QuestionModel question = (QuestionModel)QuestionListBox.SelectedItem;
+                questionList.Remove(question);
+                QuestionListBox.DataSource = null;
+                QuestionListBox.DataSource = questionList;
+                ResetCreateTestForm();
+            }
+        }
+
+        private async void CreateTestForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Session.GetInstance().mainMenu.Show();
+            await Session.GetInstance().mainMenu.PopulateTestListBoxAsync();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Mera.Quiz.UI.Forms
             InitializeComponent();
             PopulateTestListBoxAsync();
             CheckUser();
+            Session.GetInstance().mainMenu = this;
         }
 
         //This method removes removes/shows buttons according to the role given
@@ -32,7 +33,7 @@ namespace Mera.Quiz.UI.Forms
             }
         }
 
-        private async Task PopulateTestListBoxAsync()
+        public async Task PopulateTestListBoxAsync()
         {
             try
             {
@@ -91,6 +92,14 @@ namespace Mera.Quiz.UI.Forms
         {
             CreateTestForm createTestForm = new CreateTestForm();
             createTestForm.Show();
+            this.Hide();
+        }
+
+        private void updateTestBtn_Click(object sender, EventArgs e)
+        {
+            CreateTestForm createTestForm = new CreateTestForm(testListBox.SelectedItem);
+            createTestForm.Show();
+            this.Hide();
         }
     }
 }

@@ -152,6 +152,7 @@ namespace Mera.Quiz.UI.Forms
             // 
             // removeAnswerBtn
             // 
+            this.removeAnswerBtn.Enabled = false;
             this.removeAnswerBtn.Location = new System.Drawing.Point(322, 618);
             this.removeAnswerBtn.Name = "removeAnswerBtn";
             this.removeAnswerBtn.Size = new System.Drawing.Size(122, 49);
@@ -172,12 +173,14 @@ namespace Mera.Quiz.UI.Forms
             // 
             // deleteQuestionBtn
             // 
+            this.deleteQuestionBtn.Enabled = false;
             this.deleteQuestionBtn.Location = new System.Drawing.Point(821, 140);
             this.deleteQuestionBtn.Name = "deleteQuestionBtn";
             this.deleteQuestionBtn.Size = new System.Drawing.Size(150, 49);
             this.deleteQuestionBtn.TabIndex = 8;
             this.deleteQuestionBtn.Text = "Delete Question";
             this.deleteQuestionBtn.UseVisualStyleBackColor = true;
+            this.deleteQuestionBtn.Click += new System.EventHandler(this.deleteQuestionBtn_Click);
             // 
             // CreateTestForm
             // 
@@ -196,6 +199,7 @@ namespace Mera.Quiz.UI.Forms
             this.Name = "CreateTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CreateTestForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreateTestForm_FormClosed);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
