@@ -57,6 +57,7 @@ namespace Mera.Quiz.UI.API_connection
                 if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show($"{deleteTest} deleted successfully");
+                    return;
                 }
                 throw new Exception(response.ReasonPhrase);
             }
@@ -100,5 +101,23 @@ namespace Mera.Quiz.UI.API_connection
             }
         }
 
+        internal static async Task<TestModel> CreateTest(TestModel test)
+        {
+            string url = $"api/Test";
+            string testjson = JsonConvert.SerializeObject(test);
+
+            var content = new StringContent(testjson, Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = await APIHandler.client.PostAsync(url, content))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    TestModel createdTest = await response.Content.ReadAsAsync<TestModel>();
+                    MessageBox.Show($"{createdTest.TestName} was created!");
+                    return createdTest;
+                }
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
     }
 }

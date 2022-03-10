@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace Mera.Quiz.UI.Forms
 {
     partial class CreateTestForm
@@ -41,12 +43,14 @@ namespace Mera.Quiz.UI.Forms
             this.testNameLbl = new System.Windows.Forms.Label();
             this.testNameTxt = new System.Windows.Forms.TextBox();
             this.removeAnswerBtn = new System.Windows.Forms.Button();
+            this.QuestionListBox = new System.Windows.Forms.ListBox();
+            this.deleteQuestionBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // newQuestionBtn
             // 
-            this.newQuestionBtn.Location = new System.Drawing.Point(838, 103);
+            this.newQuestionBtn.Location = new System.Drawing.Point(635, 17);
             this.newQuestionBtn.Name = "newQuestionBtn";
             this.newQuestionBtn.Size = new System.Drawing.Size(122, 49);
             this.newQuestionBtn.TabIndex = 0;
@@ -56,7 +60,7 @@ namespace Mera.Quiz.UI.Forms
             // 
             // addAnswerBtn
             // 
-            this.addAnswerBtn.Location = new System.Drawing.Point(838, 178);
+            this.addAnswerBtn.Location = new System.Drawing.Point(168, 618);
             this.addAnswerBtn.Name = "addAnswerBtn";
             this.addAnswerBtn.Size = new System.Drawing.Size(122, 49);
             this.addAnswerBtn.TabIndex = 1;
@@ -66,12 +70,13 @@ namespace Mera.Quiz.UI.Forms
             // 
             // saveTestBtn
             // 
-            this.saveTestBtn.Location = new System.Drawing.Point(838, 462);
+            this.saveTestBtn.Location = new System.Drawing.Point(831, 618);
             this.saveTestBtn.Name = "saveTestBtn";
             this.saveTestBtn.Size = new System.Drawing.Size(122, 49);
             this.saveTestBtn.TabIndex = 2;
             this.saveTestBtn.Text = "Save test";
             this.saveTestBtn.UseVisualStyleBackColor = true;
+            this.saveTestBtn.Click += new System.EventHandler(this.saveTestBtn_ClickAsync);
             // 
             // panel1
             // 
@@ -147,7 +152,7 @@ namespace Mera.Quiz.UI.Forms
             // 
             // removeAnswerBtn
             // 
-            this.removeAnswerBtn.Location = new System.Drawing.Point(838, 254);
+            this.removeAnswerBtn.Location = new System.Drawing.Point(322, 618);
             this.removeAnswerBtn.Name = "removeAnswerBtn";
             this.removeAnswerBtn.Size = new System.Drawing.Size(122, 49);
             this.removeAnswerBtn.TabIndex = 6;
@@ -155,11 +160,32 @@ namespace Mera.Quiz.UI.Forms
             this.removeAnswerBtn.UseVisualStyleBackColor = true;
             this.removeAnswerBtn.Click += new System.EventHandler(this.removeAnswerBtn_Click);
             // 
+            // QuestionListBox
+            // 
+            this.QuestionListBox.FormattingEnabled = true;
+            this.QuestionListBox.ItemHeight = 20;
+            this.QuestionListBox.Location = new System.Drawing.Point(821, 212);
+            this.QuestionListBox.Name = "QuestionListBox";
+            this.QuestionListBox.Size = new System.Drawing.Size(150, 384);
+            this.QuestionListBox.TabIndex = 7;
+            this.QuestionListBox.SelectedIndexChanged += new System.EventHandler(this.QuestionListBox_SelectedIndexChanged);
+            // 
+            // deleteQuestionBtn
+            // 
+            this.deleteQuestionBtn.Location = new System.Drawing.Point(821, 140);
+            this.deleteQuestionBtn.Name = "deleteQuestionBtn";
+            this.deleteQuestionBtn.Size = new System.Drawing.Size(150, 49);
+            this.deleteQuestionBtn.TabIndex = 8;
+            this.deleteQuestionBtn.Text = "Delete Question";
+            this.deleteQuestionBtn.UseVisualStyleBackColor = true;
+            // 
             // CreateTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1001, 631);
+            this.ClientSize = new System.Drawing.Size(1001, 693);
+            this.Controls.Add(this.deleteQuestionBtn);
+            this.Controls.Add(this.QuestionListBox);
             this.Controls.Add(this.removeAnswerBtn);
             this.Controls.Add(this.testNameTxt);
             this.Controls.Add(this.testNameLbl);
@@ -168,6 +194,7 @@ namespace Mera.Quiz.UI.Forms
             this.Controls.Add(this.addAnswerBtn);
             this.Controls.Add(this.newQuestionBtn);
             this.Name = "CreateTestForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CreateTestForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -192,5 +219,7 @@ namespace Mera.Quiz.UI.Forms
         private int answerNumber = 1;
         private int questionNumber = 1;
         private System.Windows.Forms.Button removeAnswerBtn;
+        private ListBox QuestionListBox;
+        private Button deleteQuestionBtn;
     }
 }

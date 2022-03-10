@@ -22,5 +22,10 @@ namespace Mera.Quiz.UI.Models
             QuestionText = questionText;
             AnswerList = answerList;
         }
+
+        public override string ToString()
+        {
+            return QuestionText;
+        }
     }
 }

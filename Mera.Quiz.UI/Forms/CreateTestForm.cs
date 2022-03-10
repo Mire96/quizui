@@ -18,6 +18,7 @@ namespace Mera.Quiz.UI.Forms
         private List<TextBox> answerTextList;
         private List<RadioButton> correctAnswerList;
         private List<Label> answerLabelList;
+        private bool validQuestionCheck;
 
         public CreateTestForm()
         {
@@ -26,6 +27,7 @@ namespace Mera.Quiz.UI.Forms
             answerTextList = new List<TextBox>();
             correctAnswerList = new List<RadioButton>();
             answerLabelList = new List<Label>();
+            QuestionListBox.DataSource = questionList;
 
             answerTextList.Add(this.answerTxt1);
             correctAnswerList.Add(this.correctAnswer1);
@@ -70,18 +72,11 @@ namespace Mera.Quiz.UI.Forms
 
         private async void newQuestionBtn_ClickAsync(object sender, EventArgs e)
         {
-            /*Code Snippet for getting radio button answers
-            //All fields accessed this way must be PUBLIC!
-            -------------------------------------------------
-            System.Windows.Forms.RadioButton answer = this.GetType().GetField("Answerbtn1").GetValue(this) as System.Windows.Forms.RadioButton;
-            Submitbtn.Text = answer.Text;
-            -------------------------------------------------
-             */
+            validQuestionCheck = true;
 
-
-            //Creating question out of question text
-            QuestionModel question = new QuestionModel() 
-            { QuestionText = questionTxt.Text, AnswerList = new List<AnswerModel>() };
+            QuestionModel question = new QuestionModel();
+            question.QuestionText = questionTxt.Text;
+            question.AnswerList = new List<AnswerModel>();
 
             //Going through all answers to add them to the question
             for (int i = 0; i < answerNumber; i++)
@@ -92,14 +87,32 @@ namespace Mera.Quiz.UI.Forms
 
                 RadioButton correctAnswer = correctAnswerList.ElementAt(i);
                 answer.isCorrect = correctAnswer.Checked;
+                
 
                 question.AnswerList.Add(answer);
 
             }
             
-            if (!await ValidateQuestionAsync(question))
+            if (await ValidateQuestionAsync(question))
             {
+                if(QuestionListBox.SelectedItem != null)
+                {
+                    QuestionModel oldQuestion = (QuestionModel)QuestionListBox.SelectedItem;
+                    oldQuestion.AnswerList = question.AnswerList;
+                    oldQuestion.QuestionText = question.QuestionText;
+                }
+                else
+                {
+                    questionList.Add(question);
+                }
                 ResetCreateTestForm();
+                QuestionListBox.DataSource = null;
+                QuestionListBox.DataSource = questionList;
+            }
+            else
+            {
+                MessageBox.Show("Not valid question");
+                validQuestionCheck = false;
             }
 
 
@@ -107,7 +120,25 @@ namespace Mera.Quiz.UI.Forms
 
         private void ResetCreateTestForm()
         {
-            throw new NotImplementedException();
+            questionTxt.Text = "";
+            answerTxt1.Text = "";
+            correctAnswer1.Checked = false;
+            for (int i = answerNumber - 1; i > 0; i--)
+            {
+                RemoveFromForm(i);
+            }
+            answerNumber = 1;
+        }
+
+        private void RemoveFromForm(int position)
+        {
+            panel1.Controls.Remove(answerTextList.ElementAt(position));
+            panel1.Controls.Remove(answerLabelList.ElementAt(position));
+            panel1.Controls.Remove(correctAnswerList.ElementAt(position));
+
+            answerTextList.RemoveAt(position);
+            answerLabelList.RemoveAt(position);
+            correctAnswerList.RemoveAt(position);
         }
 
         private async Task<bool> ValidateQuestionAsync(QuestionModel question)
@@ -115,7 +146,7 @@ namespace Mera.Quiz.UI.Forms
             try
             {
                 QuestionModel validatedQuestion = await APICalls.ValidateQuestion(question);
-                questionList.Add(validatedQuestion);
+                
                 return true;
             }
             catch (Exception except)
@@ -134,14 +165,65 @@ namespace Mera.Quiz.UI.Forms
             }
             answerNumber -= 1;
             int position = answerNumber;
-            panel1.Controls.Remove(answerTextList.ElementAt(position));
-            panel1.Controls.Remove(answerLabelList.ElementAt(position));
-            panel1.Controls.Remove(correctAnswerList.ElementAt(position));
+            RemoveFromForm(position);
+            
 
-            answerTextList.RemoveAt(position);
-            answerLabelList.RemoveAt(position);
-            correctAnswerList.RemoveAt(position);
+        }
 
+
+        private async void saveTestBtn_ClickAsync(object sender, EventArgs e)
+        {
+
+            TestModel test = new TestModel()
+            {TestName = testNameTxt.Text, QuestionList = questionList };
+            try
+            {
+                TestModel createdTest = await APICalls.CreateTest(test);
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message);
+            }
+        }
+
+        private void QuestionListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.QuestionListBox.SelectedItem != null)
+            {
+                deleteQuestionBtn.Enabled = true;
+                PopulateQuestionForm(QuestionListBox.SelectedItem);
+            }
+            else
+            {
+                deleteQuestionBtn.Enabled = false;
+            }
+        }
+
+        private void PopulateQuestionForm(object selectedItem)
+        {
+            QuestionModel question = (QuestionModel)selectedItem;
+            
+            //Resetting the form so we can populate it with the selected question
+            ResetCreateTestForm();
+
+            //Setting answer number to the number of answers of newly selected question
+            answerNumber = 1;
+
+            //Setting initial form components
+            questionTxt.Text = question.QuestionText;
+            answerTxt1.Text = question.AnswerList.ElementAt(0).AnswerText;
+            correctAnswer1.Checked = question.AnswerList.ElementAt(0).isCorrect;
+
+            //Setting dynamically added components
+            for (int i = 1; i < question.AnswerList.Count; i++)
+            {
+                answerNumber += 1;
+                AddAnswerLabelDynamically();
+                AddAnswerTextBoxDynamically();
+                AddAnswerRadioButtonDynamically();
+                answerTextList.ElementAt(i).Text = question.AnswerList.ElementAt(i).AnswerText;
+                correctAnswerList.ElementAt(i).Checked = question.AnswerList.ElementAt(i).isCorrect;
+            }
         }
     }
 }

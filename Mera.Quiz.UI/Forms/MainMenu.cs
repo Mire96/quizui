@@ -37,7 +37,8 @@ namespace Mera.Quiz.UI.Forms
             try
             {
                 List<TestModel> testList = await APICalls.GetTests();
-                this.testListBox.Items.AddRange(testList.ToArray());
+                Session.GetInstance().testList = testList;
+                this.testListBox.DataSource = Session.GetInstance().testList;
             }
             catch (Exception except)
             {
@@ -62,10 +63,12 @@ namespace Mera.Quiz.UI.Forms
         //Can't update list box state
         private void UpdateListBox()
         {
-            testListBox.Items.Remove(testListBox.SelectedItem);
-            var tempList = testListBox.Items;
+
+            //testListBox.Items.Remove(testListBox.SelectedItem);
+            //var tempList = testListBox.Items;
+            Session.GetInstance().testList.Remove((TestModel)testListBox.SelectedItem);
             testListBox.DataSource = null;
-            testListBox.DataSource = tempList;
+            testListBox.DataSource = Session.GetInstance().testList;
 
             
         }
@@ -75,10 +78,12 @@ namespace Mera.Quiz.UI.Forms
             if(this.testListBox.SelectedItem != null)
             {
                 this.deleteTestBtn.Enabled = true;
+                this.updateTestBtn.Enabled = true;
             }
             else
             {
                 this.deleteTestBtn.Enabled = false;
+                this.updateTestBtn.Enabled = false;
             }
         }
 

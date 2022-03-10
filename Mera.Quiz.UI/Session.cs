@@ -13,6 +13,8 @@ namespace Mera.Quiz.UI
         private static Session instance { get; set; }
         public UserModel currentUser { get; set; }
 
+        public List<TestModel> testList { get; set; }
+
         private Session()
         {
 

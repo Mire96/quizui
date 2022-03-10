@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace Mera.Quiz.UI
 {
     partial class LoginForm
@@ -132,7 +134,7 @@ namespace Mera.Quiz.UI
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         #endregion

@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace Mera.Quiz.UI.Forms
 {
     partial class MainMenu
@@ -98,7 +100,7 @@ namespace Mera.Quiz.UI.Forms
             this.Name = "MainMenu";
             this.Text = "MainMenu";
             this.ResumeLayout(false);
-
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         #endregion
