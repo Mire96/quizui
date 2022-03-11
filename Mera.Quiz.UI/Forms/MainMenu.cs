@@ -101,5 +101,12 @@ namespace Mera.Quiz.UI.Forms
             createTestForm.Show();
             this.Hide();
         }
+
+        private void takeTestBtn_Click(object sender, EventArgs e)
+        {
+            TakeTestForm takeTestForm = new TakeTestForm(testListBox.SelectedItem);
+            takeTestForm.Show();
+            this.Hide();
+        }
     }
 }

@@ -46,6 +46,7 @@ namespace Mera.Quiz.UI.Forms
             this.takeTestBtn.TabIndex = 0;
             this.takeTestBtn.Text = "Take test";
             this.takeTestBtn.UseVisualStyleBackColor = true;
+            this.takeTestBtn.Click += new System.EventHandler(this.takeTestBtn_Click);
             // 
             // addTestBtn
             // 

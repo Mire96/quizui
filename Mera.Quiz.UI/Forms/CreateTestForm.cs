@@ -128,9 +128,13 @@ namespace Mera.Quiz.UI.Forms
                 {
                     questionList.Add(question);
                 }
-                ResetCreateTestForm();
+
+                
                 QuestionListBox.DataSource = null;
                 QuestionListBox.DataSource = questionList;
+                QuestionListBox.ClearSelected();
+                ResetCreateTestForm();
+
             }
             else
             {
@@ -207,9 +211,7 @@ namespace Mera.Quiz.UI.Forms
                 try
                 {
                     TestModel createdTest = await APICalls.CreateTest(test);
-                    Session.GetInstance().mainMenu.Show();
-                    await Session.GetInstance().mainMenu.PopulateTestListBoxAsync();
-                    this.Dispose();
+                    this.Close();
                 }
                 catch (Exception except)
                 {

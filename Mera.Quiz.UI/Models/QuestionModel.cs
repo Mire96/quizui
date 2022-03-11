@@ -23,6 +23,14 @@ namespace Mera.Quiz.UI.Models
             AnswerList = answerList;
         }
 
+        //Used for creating copies of real questions to check when submitting tests
+        public QuestionModel(QuestionModel question)
+        {
+            this.QuestionText = question.QuestionText;
+            this.ID = question.ID;
+            this.AnswerList = new List<AnswerModel>();
+        }
+
         public override string ToString()
         {
             return QuestionText;

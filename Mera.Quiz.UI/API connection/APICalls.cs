@@ -101,6 +101,24 @@ namespace Mera.Quiz.UI.API_connection
             }
         }
 
+        internal static async Task<int> CreateTestScore(TestModel testModel)
+        {
+            string url = $"api/Test/{testModel.ID}/Score";
+            string testJson = JsonConvert.SerializeObject(testModel);
+
+            var content = new StringContent(testJson, Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = await APIHandler.client.PostAsync(url, content))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    int createdTestScore = await response.Content.ReadAsAsync<int>();
+                    return createdTestScore;
+                }
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+
         internal static async Task<TestModel> CreateTest(TestModel test)
         {
             string url = $"api/Test";

@@ -25,6 +25,14 @@ namespace Mera.Quiz.UI.Models
         }
 
 
+        //Used for creating copies of actual answers to check during quiz submission
+        public AnswerModel(AnswerModel answer)
+        {
+            this.ID = answer.ID;
+            this.AnswerText = answer.AnswerText;
+            this.isCorrect = false;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is AnswerModel model &&
