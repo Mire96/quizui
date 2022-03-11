@@ -27,7 +27,7 @@ namespace Mera.Quiz.UI.API_connection
                 throw new Exception(response.ReasonPhrase);
             }
         }
-
+        #region User API
         public static async Task<UserModel> LoginUser(UserModel userModel)
         {
             string url = $"api/User/login";
@@ -40,28 +40,13 @@ namespace Mera.Quiz.UI.API_connection
                 if (response.IsSuccessStatusCode)
                 {
                     var userLogin = await response.Content.ReadAsAsync<UserModel>();
-                    MessageBox.Show(userLogin.UserName);
+                    MessageBox.Show($"{userLogin.UserName} logged in successfuly as {userLogin.Role}", "Quiz register", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return userLogin;
                 }
                 throw new Exception(response.ReasonPhrase);
             }
         }
 
-        internal static async Task DeleteTest(object selectedItem)
-        {
-            TestModel deleteTest = (TestModel)selectedItem;
-            string url = $"api/Test/{deleteTest.ID}";
-
-            using(HttpResponseMessage response = await APIHandler.client.DeleteAsync(url))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show($"{deleteTest} deleted successfully");
-                    return;
-                }
-                throw new Exception(response.ReasonPhrase);
-            }
-        }
 
         public static async Task<UserModel> RegisterUser(UserModel userModel)
         {
@@ -75,12 +60,31 @@ namespace Mera.Quiz.UI.API_connection
                 if (response.IsSuccessStatusCode)
                 {
                     var userLogin = await response.Content.ReadAsAsync<UserModel>();
-                    MessageBox.Show(userLogin.UserName);
+                    MessageBox.Show($"{userLogin.UserName} registered successfuly as {userLogin.Role}", "Quiz register", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return userLogin;
                 }
                 throw new Exception(response.ReasonPhrase);
             }
         }
+
+        #endregion
+
+        internal static async Task DeleteTest(object selectedItem)
+        {
+            TestModel deleteTest = (TestModel)selectedItem;
+            string url = $"api/Test/{deleteTest.ID}";
+
+            using(HttpResponseMessage response = await APIHandler.client.DeleteAsync(url))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show($"{deleteTest} deleted successfully", "Test deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+
 
         public static async Task<QuestionModel> ValidateQuestion(QuestionModel question)
         {

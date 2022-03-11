@@ -43,7 +43,7 @@ namespace Mera.Quiz.UI.Forms
             }
             catch (Exception except)
             {
-                MessageBox.Show(except.Message);
+                MessageBox.Show(except.Message, "Test error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -57,7 +57,7 @@ namespace Mera.Quiz.UI.Forms
             }
             catch (Exception except)
             {
-                MessageBox.Show(except.Message);
+                MessageBox.Show(except.Message, "Delete test error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -107,6 +107,11 @@ namespace Mera.Quiz.UI.Forms
             TakeTestForm takeTestForm = new TakeTestForm(testListBox.SelectedItem);
             takeTestForm.Show();
             this.Hide();
+        }
+
+        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Session.GetInstance().loginForm.Close();
         }
     }
 }

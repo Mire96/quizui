@@ -14,7 +14,7 @@ namespace Mera.Quiz.UI
         public UserModel currentUser { get; set; }
 
         public MainMenu mainMenu { get; set; }
-
+        public LoginForm loginForm { get; set; } 
 
         public List<TestModel> testList { get; set; }
 
@@ -32,9 +32,10 @@ namespace Mera.Quiz.UI
             return instance;
         }
 
-        internal void LoginUser(UserModel user)
+        internal void LoginUser(UserModel user, LoginForm loginForm)
         {
             currentUser = user;
+            this.loginForm = loginForm;
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
 
