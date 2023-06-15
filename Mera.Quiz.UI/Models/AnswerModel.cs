@@ -1,16 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Mera.Quiz.UI.Models
 
 
 {
-    public class AnswerModel
+    public class AnswerModel : INotifyPropertyChanged
     {
+        private bool _isCorrect;
+
         public int ID { get; set; }
-        public string AnswerText { get; set; }
-        public bool isCorrect { get; set; }
+        public string AnswerText { get; set; } = "Example answer";
+        public bool isCorrect { 
+            get => _isCorrect;
+            set
+            {
+                if (_isCorrect != value)
+                {
+                    _isCorrect = value;
+                    //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(isCorrect)));
+                }
+            }
+        }
 
         public AnswerModel()
         {
@@ -33,7 +46,9 @@ namespace Mera.Quiz.UI.Models
             this.isCorrect = false;
         }
 
-        public override bool Equals(object obj)
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public override bool Equals(object obj)
         {
             return obj is AnswerModel model &&
                    ID == model.ID &&
