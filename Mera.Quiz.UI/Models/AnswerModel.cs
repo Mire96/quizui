@@ -11,7 +11,8 @@ namespace Mera.Quiz.UI.Models
     {
         private bool _isCorrect;
 
-        public int ID { get; set; }
+		[Browsable(false)]
+		public int ID { get; set; }
         public string AnswerText { get; set; } = "Example answer";
         public bool isCorrect { 
             get => _isCorrect;

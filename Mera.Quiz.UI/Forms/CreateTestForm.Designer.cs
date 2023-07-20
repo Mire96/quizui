@@ -245,7 +245,7 @@ namespace Mera.Quiz.UI.Forms
 
 		private void OnCellContentClicked(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.ColumnIndex == 2)
+			if (e.ColumnIndex == 1)
 			{
 				for (var i = 0; i < dataGridView1.RowCount; i++)
 				{

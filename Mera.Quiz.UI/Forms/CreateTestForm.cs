@@ -104,22 +104,23 @@ namespace Mera.Quiz.UI.Forms
 
 			QuestionModel question = new QuestionModel();
 			question.QuestionText = questionTxt.Text;
-			question.AnswerList = new List<AnswerModel>();
+			//question.AnswerList = new List<AnswerModel>();
+			question.AnswerList = answers.ToList();
 
 			//Going through all answers to add them to the question
-			for (int i = 0; i < answerNumber; i++)
-			{
-				AnswerModel answer = new AnswerModel();
-				TextBox answerText = answerTextList.ElementAt(i);
-				answer.AnswerText = answerText.Text;
+			//for (int i = 0; i < answerNumber; i++)
+			//{
+			//	AnswerModel answer = new AnswerModel();
+			//	TextBox answerText = answerTextList.ElementAt(i);
+			//	answer.AnswerText = answerText.Text;
 
-				RadioButton correctAnswer = correctAnswerList.ElementAt(i);
-				answer.isCorrect = correctAnswer.Checked;
+			//	RadioButton correctAnswer = correctAnswerList.ElementAt(i);
+			//	answer.isCorrect = correctAnswer.Checked;
 
 
-				question.AnswerList.Add(answer);
+			//	question.AnswerList.Add(answer);
 
-			}
+			//}
 
 			if (await ValidateQuestionAsync(question))
 			{
