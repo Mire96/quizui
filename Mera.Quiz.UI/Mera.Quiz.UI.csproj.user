@@ -4,6 +4,9 @@
     <Compile Update="Forms\CreateTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\FinishedTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>

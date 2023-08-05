@@ -3,227 +3,364 @@ using System.Windows.Forms;
 
 namespace Mera.Quiz.UI.Forms
 {
-    partial class CreateTestForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class CreateTestForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.newQuestionBtn = new System.Windows.Forms.Button();
-            this.addAnswerBtn = new System.Windows.Forms.Button();
-            this.saveTestBtn = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.correctAnswer1 = new System.Windows.Forms.RadioButton();
-            this.answerTxt1 = new System.Windows.Forms.TextBox();
-            this.answerLbl1 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.questionTxt = new System.Windows.Forms.RichTextBox();
-            this.testNameLbl = new System.Windows.Forms.Label();
-            this.testNameTxt = new System.Windows.Forms.TextBox();
-            this.removeAnswerBtn = new System.Windows.Forms.Button();
-            this.QuestionListBox = new System.Windows.Forms.ListBox();
-            this.deleteQuestionBtn = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // newQuestionBtn
-            // 
-            this.newQuestionBtn.Location = new System.Drawing.Point(635, 17);
-            this.newQuestionBtn.Name = "newQuestionBtn";
-            this.newQuestionBtn.Size = new System.Drawing.Size(122, 49);
-            this.newQuestionBtn.TabIndex = 0;
-            this.newQuestionBtn.Text = "New Question";
-            this.newQuestionBtn.UseVisualStyleBackColor = true;
-            this.newQuestionBtn.Click += new System.EventHandler(this.newQuestionBtn_ClickAsync);
-            // 
-            // addAnswerBtn
-            // 
-            this.addAnswerBtn.Location = new System.Drawing.Point(168, 618);
-            this.addAnswerBtn.Name = "addAnswerBtn";
-            this.addAnswerBtn.Size = new System.Drawing.Size(122, 49);
-            this.addAnswerBtn.TabIndex = 1;
-            this.addAnswerBtn.Text = "Add answer";
-            this.addAnswerBtn.UseVisualStyleBackColor = true;
-            this.addAnswerBtn.Click += new System.EventHandler(this.addAnswerBtn_Click);
-            // 
-            // saveTestBtn
-            // 
-            this.saveTestBtn.Location = new System.Drawing.Point(831, 618);
-            this.saveTestBtn.Name = "saveTestBtn";
-            this.saveTestBtn.Size = new System.Drawing.Size(122, 49);
-            this.saveTestBtn.TabIndex = 2;
-            this.saveTestBtn.Text = "Save test";
-            this.saveTestBtn.UseVisualStyleBackColor = true;
-            this.saveTestBtn.Click += new System.EventHandler(this.saveTestBtn_ClickAsync);
-            // 
-            // panel1
-            // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.correctAnswer1);
-            this.panel1.Controls.Add(this.answerTxt1);
-            this.panel1.Controls.Add(this.answerLbl1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.questionTxt);
-            this.panel1.Location = new System.Drawing.Point(50, 103);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(707, 493);
-            this.panel1.TabIndex = 3;
-            // 
-            // correctAnswer1
-            // 
-            this.correctAnswer1.AutoSize = true;
-            this.correctAnswer1.Location = new System.Drawing.Point(499, 205);
-            this.correctAnswer1.Name = "correctAnswer1";
-            this.correctAnswer1.Size = new System.Drawing.Size(17, 16);
-            this.correctAnswer1.TabIndex = 8;
-            this.correctAnswer1.TabStop = true;
-            this.correctAnswer1.UseVisualStyleBackColor = true;
-            // 
-            // answerTxt1
-            // 
-            this.answerTxt1.Location = new System.Drawing.Point(220, 200);
-            this.answerTxt1.Name = "answerTxt1";
-            this.answerTxt1.Size = new System.Drawing.Size(260, 27);
-            this.answerTxt1.TabIndex = 6;
-            // 
-            // answerLbl1
-            // 
-            this.answerLbl1.AutoSize = true;
-            this.answerLbl1.Location = new System.Drawing.Point(118, 205);
-            this.answerLbl1.Name = "answerLbl1";
-            this.answerLbl1.Size = new System.Drawing.Size(69, 20);
-            this.answerLbl1.TabIndex = 7;
-            this.answerLbl1.Text = "Answer1 ";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 51);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 20);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Question Text: ";
-            // 
-            // questionTxt
-            // 
-            this.questionTxt.Location = new System.Drawing.Point(218, 48);
-            this.questionTxt.Name = "questionTxt";
-            this.questionTxt.Size = new System.Drawing.Size(441, 132);
-            this.questionTxt.TabIndex = 0;
-            this.questionTxt.Text = "";
-            // 
-            // testNameLbl
-            // 
-            this.testNameLbl.AutoSize = true;
-            this.testNameLbl.Location = new System.Drawing.Point(65, 31);
-            this.testNameLbl.Name = "testNameLbl";
-            this.testNameLbl.Size = new System.Drawing.Size(83, 20);
-            this.testNameLbl.TabIndex = 4;
-            this.testNameLbl.Text = "Test name: ";
-            // 
-            // testNameTxt
-            // 
-            this.testNameTxt.Location = new System.Drawing.Point(154, 28);
-            this.testNameTxt.Name = "testNameTxt";
-            this.testNameTxt.Size = new System.Drawing.Size(134, 27);
-            this.testNameTxt.TabIndex = 5;
-            // 
-            // removeAnswerBtn
-            // 
-            this.removeAnswerBtn.Enabled = false;
-            this.removeAnswerBtn.Location = new System.Drawing.Point(322, 618);
-            this.removeAnswerBtn.Name = "removeAnswerBtn";
-            this.removeAnswerBtn.Size = new System.Drawing.Size(122, 49);
-            this.removeAnswerBtn.TabIndex = 6;
-            this.removeAnswerBtn.Text = "Remove answer";
-            this.removeAnswerBtn.UseVisualStyleBackColor = true;
-            this.removeAnswerBtn.Click += new System.EventHandler(this.removeAnswerBtn_Click);
-            // 
-            // QuestionListBox
-            // 
-            this.QuestionListBox.FormattingEnabled = true;
-            this.QuestionListBox.ItemHeight = 20;
-            this.QuestionListBox.Location = new System.Drawing.Point(821, 212);
-            this.QuestionListBox.Name = "QuestionListBox";
-            this.QuestionListBox.Size = new System.Drawing.Size(150, 384);
-            this.QuestionListBox.TabIndex = 7;
-            this.QuestionListBox.SelectedIndexChanged += new System.EventHandler(this.QuestionListBox_SelectedIndexChanged);
-            // 
-            // deleteQuestionBtn
-            // 
-            this.deleteQuestionBtn.Enabled = false;
-            this.deleteQuestionBtn.Location = new System.Drawing.Point(821, 140);
-            this.deleteQuestionBtn.Name = "deleteQuestionBtn";
-            this.deleteQuestionBtn.Size = new System.Drawing.Size(150, 49);
-            this.deleteQuestionBtn.TabIndex = 8;
-            this.deleteQuestionBtn.Text = "Delete Question";
-            this.deleteQuestionBtn.UseVisualStyleBackColor = true;
-            this.deleteQuestionBtn.Click += new System.EventHandler(this.deleteQuestionBtn_Click);
-            // 
-            // CreateTestForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1001, 693);
-            this.Controls.Add(this.deleteQuestionBtn);
-            this.Controls.Add(this.QuestionListBox);
-            this.Controls.Add(this.removeAnswerBtn);
-            this.Controls.Add(this.testNameTxt);
-            this.Controls.Add(this.testNameLbl);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.saveTestBtn);
-            this.Controls.Add(this.addAnswerBtn);
-            this.Controls.Add(this.newQuestionBtn);
-            this.Name = "CreateTestForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CreateTestForm";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreateTestForm_FormClosed);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			newQuestionBtn = new Button();
+			saveTestBtn = new Button();
+			panel1 = new Panel();
+			correctAnswer5 = new RadioButton();
+			answerTxt5 = new TextBox();
+			answerLbl5 = new Label();
+			correctAnswer4 = new RadioButton();
+			answerTxt4 = new TextBox();
+			answerLbl4 = new Label();
+			correctAnswer3 = new RadioButton();
+			answerTxt3 = new TextBox();
+			answerLbl3 = new Label();
+			correctAnswer2 = new RadioButton();
+			answerTxt2 = new TextBox();
+			answerLbl2 = new Label();
+			correctAnswer1 = new RadioButton();
+			answerTxt1 = new TextBox();
+			answerLbl1 = new Label();
+			label1 = new Label();
+			questionTxt = new RichTextBox();
+			testNameLbl = new Label();
+			testNameTxt = new TextBox();
+			QuestionListBox = new ListBox();
+			deleteQuestionBtn = new Button();
+			panel1.SuspendLayout();
+			SuspendLayout();
+			// 
+			// newQuestionBtn
+			// 
+			newQuestionBtn.Location = new System.Drawing.Point(555, 13);
+			newQuestionBtn.Margin = new Padding(2);
+			newQuestionBtn.Name = "newQuestionBtn";
+			newQuestionBtn.Size = new System.Drawing.Size(107, 37);
+			newQuestionBtn.TabIndex = 0;
+			newQuestionBtn.Text = "New Question";
+			newQuestionBtn.UseVisualStyleBackColor = true;
+			newQuestionBtn.Click += newQuestionBtn_ClickAsync;
+			// 
+			// saveTestBtn
+			// 
+			saveTestBtn.Location = new System.Drawing.Point(727, 464);
+			saveTestBtn.Margin = new Padding(2);
+			saveTestBtn.Name = "saveTestBtn";
+			saveTestBtn.Size = new System.Drawing.Size(107, 37);
+			saveTestBtn.TabIndex = 2;
+			saveTestBtn.Text = "Save test";
+			saveTestBtn.UseVisualStyleBackColor = true;
+			saveTestBtn.Click += saveTestBtn_ClickAsync;
+			// 
+			// panel1
+			// 
+			panel1.AutoScroll = true;
+			panel1.Controls.Add(correctAnswer5);
+			panel1.Controls.Add(answerTxt5);
+			panel1.Controls.Add(answerLbl5);
+			panel1.Controls.Add(correctAnswer4);
+			panel1.Controls.Add(answerTxt4);
+			panel1.Controls.Add(answerLbl4);
+			panel1.Controls.Add(correctAnswer3);
+			panel1.Controls.Add(answerTxt3);
+			panel1.Controls.Add(answerLbl3);
+			panel1.Controls.Add(correctAnswer2);
+			panel1.Controls.Add(answerTxt2);
+			panel1.Controls.Add(answerLbl2);
+			panel1.Controls.Add(correctAnswer1);
+			panel1.Controls.Add(answerTxt1);
+			panel1.Controls.Add(answerLbl1);
+			panel1.Controls.Add(label1);
+			panel1.Controls.Add(questionTxt);
+			panel1.Location = new System.Drawing.Point(44, 77);
+			panel1.Margin = new Padding(2);
+			panel1.Name = "panel1";
+			panel1.Size = new System.Drawing.Size(618, 370);
+			panel1.TabIndex = 3;
+			// 
+			// correctAnswer5
+			// 
+			correctAnswer5.AutoSize = true;
+			correctAnswer5.Location = new System.Drawing.Point(436, 263);
+			correctAnswer5.Margin = new Padding(2);
+			correctAnswer5.Name = "correctAnswer5";
+			correctAnswer5.Size = new System.Drawing.Size(14, 13);
+			correctAnswer5.TabIndex = 20;
+			correctAnswer5.TabStop = true;
+			correctAnswer5.UseVisualStyleBackColor = true;
+			// 
+			// answerTxt5
+			// 
+			answerTxt5.Location = new System.Drawing.Point(193, 259);
+			answerTxt5.Margin = new Padding(2);
+			answerTxt5.Name = "answerTxt5";
+			answerTxt5.Size = new System.Drawing.Size(228, 23);
+			answerTxt5.TabIndex = 18;
+			// 
+			// answerLbl5
+			// 
+			answerLbl5.AutoSize = true;
+			answerLbl5.Location = new System.Drawing.Point(163, 260);
+			answerLbl5.Margin = new Padding(2, 0, 2, 0);
+			answerLbl5.Name = "answerLbl5";
+			answerLbl5.Size = new System.Drawing.Size(16, 15);
+			answerLbl5.TabIndex = 19;
+			answerLbl5.Text = "5.";
+			// 
+			// correctAnswer4
+			// 
+			correctAnswer4.AutoSize = true;
+			correctAnswer4.Location = new System.Drawing.Point(436, 235);
+			correctAnswer4.Margin = new Padding(2);
+			correctAnswer4.Name = "correctAnswer4";
+			correctAnswer4.Size = new System.Drawing.Size(14, 13);
+			correctAnswer4.TabIndex = 17;
+			correctAnswer4.TabStop = true;
+			correctAnswer4.UseVisualStyleBackColor = true;
+			// 
+			// answerTxt4
+			// 
+			answerTxt4.Location = new System.Drawing.Point(193, 231);
+			answerTxt4.Margin = new Padding(2);
+			answerTxt4.Name = "answerTxt4";
+			answerTxt4.Size = new System.Drawing.Size(228, 23);
+			answerTxt4.TabIndex = 15;
+			// 
+			// answerLbl4
+			// 
+			answerLbl4.AutoSize = true;
+			answerLbl4.Location = new System.Drawing.Point(163, 232);
+			answerLbl4.Margin = new Padding(2, 0, 2, 0);
+			answerLbl4.Name = "answerLbl4";
+			answerLbl4.Size = new System.Drawing.Size(16, 15);
+			answerLbl4.TabIndex = 16;
+			answerLbl4.Text = "4.";
+			// 
+			// correctAnswer3
+			// 
+			correctAnswer3.AutoSize = true;
+			correctAnswer3.Location = new System.Drawing.Point(436, 207);
+			correctAnswer3.Margin = new Padding(2);
+			correctAnswer3.Name = "correctAnswer3";
+			correctAnswer3.Size = new System.Drawing.Size(14, 13);
+			correctAnswer3.TabIndex = 14;
+			correctAnswer3.TabStop = true;
+			correctAnswer3.UseVisualStyleBackColor = true;
+			// 
+			// answerTxt3
+			// 
+			answerTxt3.Location = new System.Drawing.Point(193, 203);
+			answerTxt3.Margin = new Padding(2);
+			answerTxt3.Name = "answerTxt3";
+			answerTxt3.Size = new System.Drawing.Size(228, 23);
+			answerTxt3.TabIndex = 12;
+			// 
+			// answerLbl3
+			// 
+			answerLbl3.AutoSize = true;
+			answerLbl3.Location = new System.Drawing.Point(163, 205);
+			answerLbl3.Margin = new Padding(2, 0, 2, 0);
+			answerLbl3.Name = "answerLbl3";
+			answerLbl3.Size = new System.Drawing.Size(16, 15);
+			answerLbl3.TabIndex = 13;
+			answerLbl3.Text = "3.";
+			// 
+			// correctAnswer2
+			// 
+			correctAnswer2.AutoSize = true;
+			correctAnswer2.Location = new System.Drawing.Point(436, 181);
+			correctAnswer2.Margin = new Padding(2);
+			correctAnswer2.Name = "correctAnswer2";
+			correctAnswer2.Size = new System.Drawing.Size(14, 13);
+			correctAnswer2.TabIndex = 11;
+			correctAnswer2.TabStop = true;
+			correctAnswer2.UseVisualStyleBackColor = true;
+			// 
+			// answerTxt2
+			// 
+			answerTxt2.Location = new System.Drawing.Point(193, 177);
+			answerTxt2.Margin = new Padding(2);
+			answerTxt2.Name = "answerTxt2";
+			answerTxt2.Size = new System.Drawing.Size(228, 23);
+			answerTxt2.TabIndex = 9;
+			// 
+			// answerLbl2
+			// 
+			answerLbl2.AutoSize = true;
+			answerLbl2.Location = new System.Drawing.Point(163, 178);
+			answerLbl2.Margin = new Padding(2, 0, 2, 0);
+			answerLbl2.Name = "answerLbl2";
+			answerLbl2.Size = new System.Drawing.Size(16, 15);
+			answerLbl2.TabIndex = 10;
+			answerLbl2.Text = "2.";
+			// 
+			// correctAnswer1
+			// 
+			correctAnswer1.AutoSize = true;
+			correctAnswer1.Location = new System.Drawing.Point(436, 154);
+			correctAnswer1.Margin = new Padding(2);
+			correctAnswer1.Name = "correctAnswer1";
+			correctAnswer1.Size = new System.Drawing.Size(14, 13);
+			correctAnswer1.TabIndex = 8;
+			correctAnswer1.TabStop = true;
+			correctAnswer1.UseVisualStyleBackColor = true;
+			// 
+			// answerTxt1
+			// 
+			answerTxt1.Location = new System.Drawing.Point(193, 150);
+			answerTxt1.Margin = new Padding(2);
+			answerTxt1.Name = "answerTxt1";
+			answerTxt1.Size = new System.Drawing.Size(228, 23);
+			answerTxt1.TabIndex = 6;
+			// 
+			// answerLbl1
+			// 
+			answerLbl1.AutoSize = true;
+			answerLbl1.Location = new System.Drawing.Point(163, 151);
+			answerLbl1.Margin = new Padding(2, 0, 2, 0);
+			answerLbl1.Name = "answerLbl1";
+			answerLbl1.Size = new System.Drawing.Size(16, 15);
+			answerLbl1.TabIndex = 7;
+			answerLbl1.Text = "1.";
+			// 
+			// label1
+			// 
+			label1.AutoSize = true;
+			label1.Location = new System.Drawing.Point(71, 38);
+			label1.Margin = new Padding(2, 0, 2, 0);
+			label1.Name = "label1";
+			label1.Size = new System.Drawing.Size(85, 15);
+			label1.TabIndex = 6;
+			label1.Text = "Question Text: ";
+			// 
+			// questionTxt
+			// 
+			questionTxt.Location = new System.Drawing.Point(191, 36);
+			questionTxt.Margin = new Padding(2);
+			questionTxt.Name = "questionTxt";
+			questionTxt.Size = new System.Drawing.Size(387, 100);
+			questionTxt.TabIndex = 0;
+			questionTxt.Text = "";
+			// 
+			// testNameLbl
+			// 
+			testNameLbl.AutoSize = true;
+			testNameLbl.Location = new System.Drawing.Point(57, 23);
+			testNameLbl.Margin = new Padding(2, 0, 2, 0);
+			testNameLbl.Name = "testNameLbl";
+			testNameLbl.Size = new System.Drawing.Size(66, 15);
+			testNameLbl.TabIndex = 4;
+			testNameLbl.Text = "Test name: ";
+			// 
+			// testNameTxt
+			// 
+			testNameTxt.Location = new System.Drawing.Point(135, 21);
+			testNameTxt.Margin = new Padding(2);
+			testNameTxt.Name = "testNameTxt";
+			testNameTxt.Size = new System.Drawing.Size(118, 23);
+			testNameTxt.TabIndex = 5;
+			// 
+			// QuestionListBox
+			// 
+			QuestionListBox.FormattingEnabled = true;
+			QuestionListBox.ItemHeight = 15;
+			QuestionListBox.Location = new System.Drawing.Point(719, 159);
+			QuestionListBox.Margin = new Padding(2);
+			QuestionListBox.Name = "QuestionListBox";
+			QuestionListBox.Size = new System.Drawing.Size(132, 289);
+			QuestionListBox.TabIndex = 7;
+			QuestionListBox.SelectedIndexChanged += QuestionListBox_SelectedIndexChanged;
+			// 
+			// deleteQuestionBtn
+			// 
+			deleteQuestionBtn.Enabled = false;
+			deleteQuestionBtn.Location = new System.Drawing.Point(719, 105);
+			deleteQuestionBtn.Margin = new Padding(2);
+			deleteQuestionBtn.Name = "deleteQuestionBtn";
+			deleteQuestionBtn.Size = new System.Drawing.Size(131, 37);
+			deleteQuestionBtn.TabIndex = 8;
+			deleteQuestionBtn.Text = "Delete Question";
+			deleteQuestionBtn.UseVisualStyleBackColor = true;
+			deleteQuestionBtn.Click += deleteQuestionBtn_Click;
+			// 
+			// CreateTestForm
+			// 
+			AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			AutoScaleMode = AutoScaleMode.Font;
+			ClientSize = new System.Drawing.Size(872, 520);
+			Controls.Add(deleteQuestionBtn);
+			Controls.Add(QuestionListBox);
+			Controls.Add(testNameTxt);
+			Controls.Add(testNameLbl);
+			Controls.Add(panel1);
+			Controls.Add(saveTestBtn);
+			Controls.Add(newQuestionBtn);
+			Margin = new Padding(2);
+			Name = "CreateTestForm";
+			StartPosition = FormStartPosition.CenterScreen;
+			Text = "CreateTestForm";
+			FormClosed += CreateTestForm_FormClosed;
+			panel1.ResumeLayout(false);
+			panel1.PerformLayout();
+			ResumeLayout(false);
+			PerformLayout();
+		}
 
-        }
+		#endregion
 
-        #endregion
-
-        private System.Windows.Forms.Button newQuestionBtn;
-        private System.Windows.Forms.Button addAnswerBtn;
-        private System.Windows.Forms.Button saveTestBtn;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton correctAnswer1;
-        private System.Windows.Forms.TextBox answerTxt1;
-        private System.Windows.Forms.Label answerLbl1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox questionTxt;
-        private System.Windows.Forms.Label testNameLbl;
-        private System.Windows.Forms.TextBox testNameTxt;
-        private int answerNumber = 1;
-        private int questionNumber = 1;
-        private System.Windows.Forms.Button removeAnswerBtn;
-        private ListBox QuestionListBox;
-        private Button deleteQuestionBtn;
-    }
+		private System.Windows.Forms.Button newQuestionBtn;
+		private System.Windows.Forms.Button saveTestBtn;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.RadioButton correctAnswer1;
+		private System.Windows.Forms.TextBox answerTxt1;
+		private System.Windows.Forms.Label answerLbl1;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.RichTextBox questionTxt;
+		private System.Windows.Forms.Label testNameLbl;
+		private System.Windows.Forms.TextBox testNameTxt;
+		private int answerNumber = 1;
+		private int questionNumber = 1;
+		private ListBox QuestionListBox;
+		private Button deleteQuestionBtn;
+		private RadioButton correctAnswer5;
+		private TextBox answerTxt5;
+		private Label answerLbl5;
+		private RadioButton correctAnswer4;
+		private TextBox answerTxt4;
+		private Label answerLbl4;
+		private RadioButton correctAnswer3;
+		private TextBox answerTxt3;
+		private Label answerLbl3;
+		private RadioButton correctAnswer2;
+		private TextBox answerTxt2;
+		private Label answerLbl2;
+	}
 }

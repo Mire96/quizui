@@ -42,6 +42,7 @@ namespace Mera.Quiz.UI.Forms
 
         private void SetupQuestionList()
         {
+            
             submitQuestionList = new List<QuestionModel>();
 
             foreach(QuestionModel question in testModel.QuestionList)
@@ -70,30 +71,57 @@ namespace Mera.Quiz.UI.Forms
             QuestionModel question = submitQuestionList.ElementAt(currentQuestion);
             questionBox.Text = question.QuestionText;
 
-            for (int i = 0; i < question.AnswerList.Count; i++)
-            {
-                RadioButton answerBtn = new RadioButton();
-                answerBtn.Checked = question.AnswerList.ElementAt(i).isCorrect;
-                questionBox.Controls.Add(answerBtn);
-                answerButtonList.Add(answerBtn);
+            //for (int i = 0; i < question.AnswerList.Count; i++)
+            //{
+            //    RadioButton answerBtn = new RadioButton();
+            //    answerBtn.Checked = question.AnswerList.ElementAt(i).isChosen;
+            //    questionBox.Controls.Add(answerBtn);
+            //    answerButtonList.Add(answerBtn);
 
-                //Drawing the radio button
-                answerBtn.Location = new Point(25, 40 * (i + 1));
-                answerBtn.Size = new Size(500, 25);
-                answerBtn.Text = question.AnswerList.ElementAt(i).AnswerText;
-            }
+            //    //Drawing the radio button
+            //    answerBtn.Location = new Point(25, 40 * (i + 1));
+            //    answerBtn.Size = new Size(500, 25);
+            //    answerBtn.Text = question.AnswerList.ElementAt(i).AnswerText;
+            //}
+            GenerateAnswers(question);
         }
 
-        
+		private void GenerateAnswers(QuestionModel question)
+		{
+			// Calculate available width for answers
+			int availableWidth = questionBox.Width - 40 - 30; // Left margin + Right margin
 
-        private async void submitTestBtn_Click(object sender, EventArgs e)
+			// Generate answer options dynamically
+			for (int i = 0; i < question.AnswerList.Count; i++)
+			{
+				int fontSize = 10;
+				Font answerFont = new Font("Segoe UI", fontSize, FontStyle.Regular);
+
+				RadioButton rbCorrectAnswer = new RadioButton
+				{
+					Name = $"rbCorrectAnswer{i}",
+					Location = new Point(100, 100 + i * 50),
+					Text = $"{question.AnswerList.ElementAt(i).AnswerText}",
+					Checked = false,
+                    Font = answerFont,
+                    AutoSize = true
+				};
+                answerButtonList.Add(rbCorrectAnswer);
+				questionBox.Controls.Add(rbCorrectAnswer);
+			}
+
+		}
+
+
+
+		private async void submitTestBtn_Click(object sender, EventArgs e)
         {
             
             SaveAnswerToSubmit();
 
             foreach (QuestionModel question in submitQuestionList)
             {
-                if(!question.AnswerList.Any(a => a.isCorrect))
+                if(!question.AnswerList.Any(a => a.isChosen))
                 {
                     MessageBox.Show("You must select an answer for all questions");
                     return;
@@ -106,8 +134,18 @@ namespace Mera.Quiz.UI.Forms
             try
             {
                 int testScoreId = await APICalls.CreateTestScore(testModel);
-                MessageBox.Show($"Your score is {testModel.Score} on '{testModel.TestName}' test");
-                return;
+				//DialogResult result = MessageBox.Show($"Your score is {testModel.Score} on '{testModel.TestName}' test");
+
+				//if (result == DialogResult.OK) 
+				//{
+				//    this.Close();
+				//}
+				FinishedTestForm finishedTest = new FinishedTestForm(testModel);
+				finishedTest.TestCompleted += CloseTakeTestForm;
+				finishedTest.Show();
+                this.Hide();
+				// Show the FinishedTest form
+				return;
             }
             catch (Exception except)
             {
@@ -117,15 +155,19 @@ namespace Mera.Quiz.UI.Forms
             }
 
         }
+		private void CloseTakeTestForm(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 
-        private void SaveAnswerToSubmit()
+		private void SaveAnswerToSubmit()
         {
             for (int i = 0; i < answerButtonList.Count; i++)
             {
                 submitQuestionList
                     .ElementAt(currentQuestion)
                     .AnswerList.ElementAt(i)
-                    .isCorrect = answerButtonList.ElementAt(i).Checked;
+                    .isChosen = answerButtonList.ElementAt(i).Checked;
             }
         }
 
@@ -138,7 +180,8 @@ namespace Mera.Quiz.UI.Forms
 
                 for (int j = 0; j < question.AnswerList.Count; j++)
                 {
-                    if (question.AnswerList.ElementAt(j).isCorrect)
+                    AnswerModel chosenAnswer = question.AnswerList.ElementAt(j);
+                    if (chosenAnswer.isChosen)
                     {
                         //if (testModel.QuestionList.ElementAt(i).AnswerList.ElementAt(j).isCorrect)
                         //{
@@ -148,7 +191,8 @@ namespace Mera.Quiz.UI.Forms
                         //{
                         //    score -= 1;
                         //}
-                        score += testModel.QuestionList.ElementAt(i).AnswerList.ElementAt(j).isCorrect ? 1 : -1;
+                        
+                        score += testModel.QuestionList.ElementAt(i).CorrectAnswer == chosenAnswer ? 1 : -1;
 
                     }
                 }

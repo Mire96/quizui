@@ -10,7 +10,7 @@ namespace Mera.Quiz.UI.Models
     {
         public int ID { get; set; }
         public string AnswerText { get; set; }
-        public bool isCorrect { get; set; }
+        public bool isChosen { get; set; }
 
         public AnswerModel()
         {
@@ -21,7 +21,7 @@ namespace Mera.Quiz.UI.Models
         {
             ID = -1;
             AnswerText = answerText;
-            this.isCorrect = isCorrect;
+            this.isChosen = isCorrect;
         }
 
 
@@ -30,15 +30,23 @@ namespace Mera.Quiz.UI.Models
         {
             this.ID = answer.ID;
             this.AnswerText = answer.AnswerText;
-            this.isCorrect = false;
+            this.isChosen = false;
         }
 
-        public override bool Equals(object obj)
-        {
-            return obj is AnswerModel model &&
-                   ID == model.ID &&
-                   AnswerText == model.AnswerText &&
-                   isCorrect == model.isCorrect;
-        }
-    }
+		public override bool Equals(object obj)
+		{
+			return obj is AnswerModel model &&
+				   AnswerText == model.AnswerText;
+		}
+
+		public static bool operator ==(AnswerModel left, AnswerModel right)
+		{
+			return EqualityComparer<AnswerModel>.Default.Equals(left, right);
+		}
+
+		public static bool operator !=(AnswerModel left, AnswerModel right)
+		{
+			return !(left == right);
+		}
+	}
 }
