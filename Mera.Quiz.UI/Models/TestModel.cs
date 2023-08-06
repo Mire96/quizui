@@ -10,7 +10,7 @@ namespace Mera.Quiz.UI.Models
         public string TestName { get; set; }
         public List<QuestionModel> QuestionList { get; set; }
         public UserModel UserName { get; set; }
-        public int Score { get; set; }
+        public TestScoreModel Score { get; set; }
 
         public override string ToString()
         {

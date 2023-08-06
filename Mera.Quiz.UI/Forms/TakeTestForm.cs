@@ -118,7 +118,6 @@ namespace Mera.Quiz.UI.Forms
         {
             
             SaveAnswerToSubmit();
-
             foreach (QuestionModel question in submitQuestionList)
             {
                 if(!question.AnswerList.Any(a => a.isChosen))
@@ -128,19 +127,20 @@ namespace Mera.Quiz.UI.Forms
                 }
             }
 
-            testModel.Score = CalculateScore();
-            testModel.UserName = Session.GetInstance().currentUser;
+			TestScoreModel testScore = CalculateScore();
+            testScore.Test = testModel;
+            testScore.User = Session.GetInstance().currentUser;
 
             try
             {
-                int testScoreId = await APICalls.CreateTestScore(testModel);
+                int testScoreId = await APICalls.CreateTestScore(testScore);
 				//DialogResult result = MessageBox.Show($"Your score is {testModel.Score} on '{testModel.TestName}' test");
 
 				//if (result == DialogResult.OK) 
 				//{
 				//    this.Close();
 				//}
-				FinishedTestForm finishedTest = new FinishedTestForm(testModel);
+				FinishedTestForm finishedTest = new FinishedTestForm(testScore);
 				finishedTest.TestCompleted += CloseTakeTestForm;
 				finishedTest.Show();
                 this.Hide();
@@ -171,35 +171,51 @@ namespace Mera.Quiz.UI.Forms
             }
         }
 
-        private int CalculateScore()
+        private TestScoreModel CalculateScore()
         {
+            var testScore = new TestScoreModel() {
+                DateTaken = DateTime.Now,
+                UserAnswers = new List<UserAnswers>()
+            };
             int score = 0;
             for (int i = 0; i < submitQuestionList.Count; i++)
             {
                 QuestionModel question = submitQuestionList.ElementAt(i);
+                AnswerModel chosenAnswer = question.AnswerList.Find(a => a.isChosen);
 
-                for (int j = 0; j < question.AnswerList.Count; j++)
-                {
-                    AnswerModel chosenAnswer = question.AnswerList.ElementAt(j);
-                    if (chosenAnswer.isChosen)
-                    {
-                        //if (testModel.QuestionList.ElementAt(i).AnswerList.ElementAt(j).isCorrect)
-                        //{
-                        //    score += 1;
-                        //}
-                        //else
-                        //{
-                        //    score -= 1;
-                        //}
-                        
-                        score += testModel.QuestionList.ElementAt(i).CorrectAnswer == chosenAnswer ? 1 : -1;
+				var userAnswer = new UserAnswers() { 
+                    Question = question,
+                    ChosenAnswer = chosenAnswer
+                };
 
-                    }
-                }
+                testScore.UserAnswers.Add(userAnswer);
+
+				score += question.CorrectAnswer == chosenAnswer ? 1 : -1;
+
+
+				//for (int j = 0; j < question.AnswerList.Count; j++)
+    //            {
+    //                AnswerModel chosenAnswer = question.AnswerList.ElementAt(j);
+    //                if (chosenAnswer.isChosen)
+    //                {
+    //                    //if (testModel.QuestionList.ElementAt(i).AnswerList.ElementAt(j).isCorrect)
+    //                    //{
+    //                    //    score += 1;
+    //                    //}
+    //                    //else
+    //                    //{
+    //                    //    score -= 1;
+    //                    //}
+    //                    userAnswer.ChosenAnswer = chosenAnswer;
+
+    //                }
+    //            }
             }
 
+            testScore.Score = score;
 
-            return score < 0 ? 0 : score;
+
+            return testScore;
                
         }
 

@@ -105,10 +105,10 @@ namespace Mera.Quiz.UI.API_connection
             }
         }
 
-        internal static async Task<int> CreateTestScore(TestModel testModel)
+        internal static async Task<int> CreateTestScore(TestScoreModel testScoreModel)
         {
-            string url = $"api/Test/{testModel.ID}/Score";
-            string testJson = JsonConvert.SerializeObject(testModel);
+            string url = $"api/Test/Score";
+            string testJson = JsonConvert.SerializeObject(testScoreModel);
 
             var content = new StringContent(testJson, Encoding.UTF8, "application/json");
 
