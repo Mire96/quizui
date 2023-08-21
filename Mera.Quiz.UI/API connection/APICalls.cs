@@ -13,7 +13,27 @@ namespace Mera.Quiz.UI.API_connection
 {
     public class APICalls
     {
-        public static async Task<List<TestModel>> GetTests()
+
+		#region TestResults API
+        public static async Task<List<TestScoreModel>> GetTestResults(int userId)
+        {
+			string url = $"api/Test/score/user/{userId}";
+
+			using (HttpResponseMessage response = await APIHandler.client.GetAsync(url))
+			{
+				if (response.IsSuccessStatusCode)
+				{
+					var testResults = await response.Content.ReadAsAsync<List<TestScoreModel>>();
+					return testResults;
+				}
+				throw new Exception(response.ReasonPhrase);
+			}
+		}
+
+		#endregion
+
+
+		public static async Task<List<TestModel>> GetTests()
         {
             string url = $"api/Test";
 
