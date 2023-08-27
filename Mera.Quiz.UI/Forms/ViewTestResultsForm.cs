@@ -38,7 +38,7 @@ namespace Mera.Quiz.UI.Forms
 
 		private void downloadPdfBtn_Click(object sender, EventArgs e)
 		{
-			if(testResultListBox.SelectedItem != null)
+			if (testResultListBox.SelectedItem != null)
 			{
 				TestScoreModel.GenerateTestResultPDF((TestScoreModel)testResultListBox.SelectedItem);
 				MessageBox.Show("Test downloaded successfully");
@@ -47,7 +47,7 @@ namespace Mera.Quiz.UI.Forms
 			{
 				MessageBox.Show("You must select a test result to download it's pdf");
 			}
-			
+
 		}
 
 		private async void ViewTestResultsForm_FormClosed(object sender, FormClosedEventArgs e)

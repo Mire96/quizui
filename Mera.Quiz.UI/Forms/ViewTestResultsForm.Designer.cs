@@ -1,4 +1,6 @@
-﻿namespace Mera.Quiz.UI.Forms
+﻿using System.Windows.Forms;
+
+namespace Mera.Quiz.UI.Forms
 {
 	partial class ViewTestResultsForm
 	{
@@ -28,9 +30,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			testResultListBox = new System.Windows.Forms.ListBox();
-			button1 = new System.Windows.Forms.Button();
-			downloadPdfBtn = new System.Windows.Forms.Button();
+			testResultListBox = new ListBox();
+			downloadPdfBtn = new Button();
 			SuspendLayout();
 			// 
 			// testResultListBox
@@ -38,19 +39,10 @@
 			testResultListBox.FormattingEnabled = true;
 			testResultListBox.ItemHeight = 41;
 			testResultListBox.Location = new System.Drawing.Point(56, 70);
-			testResultListBox.Margin = new System.Windows.Forms.Padding(6);
+			testResultListBox.Margin = new Padding(6);
 			testResultListBox.Name = "testResultListBox";
 			testResultListBox.Size = new System.Drawing.Size(1615, 578);
 			testResultListBox.TabIndex = 5;
-			// 
-			// button1
-			// 
-			button1.Location = new System.Drawing.Point(64, 887);
-			button1.Name = "button1";
-			button1.Size = new System.Drawing.Size(1607, 58);
-			button1.TabIndex = 6;
-			button1.Text = "button1";
-			button1.UseVisualStyleBackColor = true;
 			// 
 			// downloadPdfBtn
 			// 
@@ -65,21 +57,20 @@
 			// ViewTestResultsForm
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
-			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			ClientSize = new System.Drawing.Size(1730, 1044);
+			AutoScaleMode = AutoScaleMode.Font;
+			ClientSize = new System.Drawing.Size(1730, 957);
 			Controls.Add(downloadPdfBtn);
-			Controls.Add(button1);
 			Controls.Add(testResultListBox);
 			Name = "ViewTestResultsForm";
+			StartPosition = FormStartPosition.CenterScreen;
 			Text = "ViewTestResultsForm";
-			FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ViewTestResultsForm_FormClosed);
+			FormClosed += ViewTestResultsForm_FormClosed;
 			ResumeLayout(false);
 		}
 
 		#endregion
 
 		public System.Windows.Forms.ListBox testResultListBox;
-		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button downloadPdfBtn;
 	}
 }

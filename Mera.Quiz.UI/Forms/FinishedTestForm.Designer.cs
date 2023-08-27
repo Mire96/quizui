@@ -1,4 +1,6 @@
-﻿namespace Mera.Quiz.UI.Forms
+﻿using System.Windows.Forms;
+
+namespace Mera.Quiz.UI.Forms
 {
 	partial class FinishedTestForm
 	{
@@ -75,6 +77,7 @@
 			Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
 			Name = "FinishedTestForm";
 			Text = "FinishedTestForm";
+			StartPosition = FormStartPosition.CenterScreen;
 			FormClosed += FinishedTestForm_FormClosed;
 			ResumeLayout(false);
 			PerformLayout();

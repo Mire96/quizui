@@ -60,14 +60,29 @@ namespace Mera.Quiz.UI.Forms
 			testModel = (TestModel)selectedItem;
 
 			InitializeComponent();
-			questionList = new List<QuestionModel>();
 			answerTextList = new List<TextBox>();
 			correctAnswerList = new List<RadioButton>();
 			answerLabelList = new List<Label>();
 
 			answerTextList.Add(this.answerTxt1);
+			answerTextList.Add(this.answerTxt2);
+			answerTextList.Add(this.answerTxt3);
+			answerTextList.Add(this.answerTxt4);
+			answerTextList.Add(this.answerTxt5);
+
+
 			correctAnswerList.Add(this.correctAnswer1);
+			correctAnswerList.Add(this.correctAnswer2);
+			correctAnswerList.Add(this.correctAnswer3);
+			correctAnswerList.Add(this.correctAnswer4);
+			correctAnswerList.Add(this.correctAnswer5);
+
+
 			answerLabelList.Add(this.answerLbl1);
+			answerLabelList.Add(this.answerLbl2);
+			answerLabelList.Add(this.answerLbl3);
+			answerLabelList.Add(this.answerLbl4);
+			answerLabelList.Add(this.answerLbl5);
 
 			testNameTxt.Text = testModel.TestName;
 			questionList = testModel.QuestionList;
@@ -76,31 +91,6 @@ namespace Mera.Quiz.UI.Forms
 
 		
 
-		private void AddAnswerRadioButtonDynamically()
-		{
-			RadioButton newAnswerRadioButton = new RadioButton() { Text = "", Name = $"correctAnswer{answerNumber}" };
-			correctAnswerList.Add(newAnswerRadioButton);
-			this.panel1.Controls.Add(newAnswerRadioButton);
-			newAnswerRadioButton.Location = new Point(499, (175 + answerNumber * 30));
-		}
-
-		private void AddAnswerTextBoxDynamically()
-		{
-			TextBox newAnswerBox = new TextBox() { Text = "", Name = $"answerTxt{answerNumber}" };
-			answerTextList.Add(newAnswerBox);
-			this.panel1.Controls.Add(newAnswerBox);
-
-			newAnswerBox.Size = new Size(260, 27);
-			newAnswerBox.Location = new Point(220, (170 + answerNumber * 30));
-		}
-
-		private void AddAnswerLabelDynamically()
-		{
-			Label newAnswerLabel = new Label() { Text = $"Answer{answerNumber}" };
-			answerLabelList.Add(newAnswerLabel);
-			this.panel1.Controls.Add(newAnswerLabel);
-			newAnswerLabel.Location = new Point(118, (175 + answerNumber * 30));
-		}
 
 
 		private async Task<bool> ValidateAndSaveQuestion()
@@ -205,7 +195,12 @@ namespace Mera.Quiz.UI.Forms
 		{
 			if (!await ValidateAndSaveQuestion())
 			{
-				return;
+				DialogResult dialogResult = MessageBox.Show("The last question in the form was not valid. Do you want to skip it and save the test anyway?", "Save test?", MessageBoxButtons.YesNo);
+				if (dialogResult == DialogResult.No)
+				{
+					return;
+				}
+				
 			}
 
 			if (testModel == null)
@@ -263,21 +258,13 @@ namespace Mera.Quiz.UI.Forms
 			//Resetting the form so we can populate it with the selected question
 			ResetCreateTestForm();
 
-			//Setting answer number to the number of answers of newly selected question
-			answerNumber = 1;
 
 			//Setting initial form components
 			questionTxt.Text = question.QuestionText;
-			answerTxt1.Text = question.AnswerList.ElementAt(0).AnswerText;
-			correctAnswer1.Checked = question.AnswerList.ElementAt(0) == question.CorrectAnswer;
 
 			//Setting dynamically added components
-			for (int i = 1; i < question.AnswerList.Count; i++)
+			for (int i = 0; i < question.AnswerList.Count; i++)
 			{
-				answerNumber += 1;
-				AddAnswerLabelDynamically();
-				AddAnswerTextBoxDynamically();
-				AddAnswerRadioButtonDynamically();
 				answerTextList.ElementAt(i).Text = question.AnswerList.ElementAt(i).AnswerText;
 				correctAnswerList.ElementAt(i).Checked = question.AnswerList.ElementAt(i) == question.CorrectAnswer;
 			}
