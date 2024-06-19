@@ -32,7 +32,7 @@ namespace Mera.Quiz.UI.Forms
 			}
 			catch (Exception except)
 			{
-				MessageBox.Show(except.Message, "Test error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(except.Message, "Failed to load test results", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -40,8 +40,8 @@ namespace Mera.Quiz.UI.Forms
 		{
 			if (testResultListBox.SelectedItem != null)
 			{
-				TestScoreModel.GenerateTestResultPDF((TestScoreModel)testResultListBox.SelectedItem);
-				MessageBox.Show("Test downloaded successfully");
+				TestScoreModel.DownloadTestResultPDF((TestScoreModel)testResultListBox.SelectedItem);
+				MessageBox.Show("Test result downloaded successfully");
 			}
 			else
 			{

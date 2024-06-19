@@ -150,7 +150,7 @@ namespace Mera.Quiz.UI.Forms
             catch (Exception except)
             {
 
-                MessageBox.Show(except.Message);
+                MessageBox.Show(except.Message, "Failed to save test result");
                 return;
             }
 

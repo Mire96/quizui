@@ -43,7 +43,7 @@ namespace Mera.Quiz.UI.Forms
 			}
 			catch (Exception except)
 			{
-				MessageBox.Show(except.Message, "Test error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(except.Message, "Failed to load test", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -57,7 +57,7 @@ namespace Mera.Quiz.UI.Forms
 			}
 			catch (Exception except)
 			{
-				MessageBox.Show(except.Message, "Delete test error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(except.Message, "Failed to delete test", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -104,6 +104,11 @@ namespace Mera.Quiz.UI.Forms
 
 		private void takeTestBtn_Click(object sender, EventArgs e)
 		{
+			if(testListBox.SelectedItem == null)
+			{
+				MessageBox.Show($"No test was selected or system failed to load the test", "Failed to load test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 			TakeTestForm takeTestForm = new TakeTestForm(testListBox.SelectedItem);
 			takeTestForm.Show();
 			this.Hide();

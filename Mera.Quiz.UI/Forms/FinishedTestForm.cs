@@ -36,7 +36,7 @@ namespace Mera.Quiz.UI.Forms
 		private async void button1_Click(object sender, EventArgs e)
 		{
 			//GenerateTestResultPDF(testScore);
-			TestScoreModel.GenerateTestResultPDF(testScore);
+			TestScoreModel.DownloadTestResultPDF(testScore);
 			MessageBox.Show("Test downloaded successfully");
 			this.Close();
 		}

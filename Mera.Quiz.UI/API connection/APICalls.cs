@@ -60,7 +60,7 @@ namespace Mera.Quiz.UI.API_connection
                 if (response.IsSuccessStatusCode)
                 {
                     var userLogin = await response.Content.ReadAsAsync<UserModel>();
-                    MessageBox.Show($"{userLogin.UserName} logged in successfuly as {userLogin.Role}", "Quiz register", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{userLogin.UserName} logged in successfuly as {userLogin.Role}", "Quiz login", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return userLogin;
                 }
                 throw new Exception(response.ReasonPhrase);
@@ -174,7 +174,7 @@ namespace Mera.Quiz.UI.API_connection
                 if (response.IsSuccessStatusCode)
                 {
                     TestModel createdTest = await response.Content.ReadAsAsync<TestModel>();
-                    MessageBox.Show($"{createdTest.TestName} was created!");
+                    MessageBox.Show($"{createdTest.TestName} was successfully updated!");
                     return createdTest;
                 }
                 throw new Exception(response.ReasonPhrase);

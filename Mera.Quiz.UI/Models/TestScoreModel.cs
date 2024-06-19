@@ -28,7 +28,7 @@ namespace Mera.Quiz.UI.Models
 			return $"{Test.TestName} - Date taken: {DateTaken} - Score: {Score}";
 		}
 
-		public static void GenerateTestResultPDF(TestScoreModel testScore)
+		public static void DownloadTestResultPDF(TestScoreModel testScore)
 		{
 			// Create a new PDF document
 			PdfDocument document = new PdfDocument();

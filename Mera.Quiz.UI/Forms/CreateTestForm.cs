@@ -215,7 +215,7 @@ namespace Mera.Quiz.UI.Forms
 				}
 				catch (Exception except)
 				{
-					MessageBox.Show(except.Message);
+					MessageBox.Show(except.Message, "Test Creation failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 			else
@@ -232,7 +232,7 @@ namespace Mera.Quiz.UI.Forms
 				catch (Exception except)
 				{
 
-					MessageBox.Show(except.Message);
+					MessageBox.Show(except.Message, "Updating test failed");
 				}
 			}
 
