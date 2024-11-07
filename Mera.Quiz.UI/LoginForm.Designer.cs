@@ -44,8 +44,8 @@ namespace Mera.Quiz.UI
 			// 
 			// usernametxt
 			// 
-			usernametxt.Location = new System.Drawing.Point(463, 609);
-			usernametxt.Margin = new Padding(6, 6, 6, 6);
+			usernametxt.Location = new System.Drawing.Point(248, 368);
+			usernametxt.Margin = new Padding(6);
 			usernametxt.Name = "usernametxt";
 			usernametxt.Size = new System.Drawing.Size(308, 47);
 			usernametxt.TabIndex = 0;
@@ -53,7 +53,7 @@ namespace Mera.Quiz.UI
 			// usernamelbl
 			// 
 			usernamelbl.AutoSize = true;
-			usernamelbl.Location = new System.Drawing.Point(238, 615);
+			usernamelbl.Location = new System.Drawing.Point(67, 368);
 			usernamelbl.Margin = new Padding(6, 0, 6, 0);
 			usernamelbl.Name = "usernamelbl";
 			usernamelbl.Size = new System.Drawing.Size(157, 41);
@@ -63,7 +63,7 @@ namespace Mera.Quiz.UI
 			// passwordlbl
 			// 
 			passwordlbl.AutoSize = true;
-			passwordlbl.Location = new System.Drawing.Point(255, 709);
+			passwordlbl.Location = new System.Drawing.Point(67, 462);
 			passwordlbl.Margin = new Padding(6, 0, 6, 0);
 			passwordlbl.Name = "passwordlbl";
 			passwordlbl.Size = new System.Drawing.Size(143, 41);
@@ -72,8 +72,8 @@ namespace Mera.Quiz.UI
 			// 
 			// passwordtxt
 			// 
-			passwordtxt.Location = new System.Drawing.Point(463, 703);
-			passwordtxt.Margin = new Padding(6, 6, 6, 6);
+			passwordtxt.Location = new System.Drawing.Point(248, 462);
+			passwordtxt.Margin = new Padding(6);
 			passwordtxt.Name = "passwordtxt";
 			passwordtxt.PasswordChar = '*';
 			passwordtxt.Size = new System.Drawing.Size(308, 47);
@@ -82,7 +82,7 @@ namespace Mera.Quiz.UI
 			// registerlbl
 			// 
 			registerlbl.AutoSize = true;
-			registerlbl.Location = new System.Drawing.Point(544, 1095);
+			registerlbl.Location = new System.Drawing.Point(242, 727);
 			registerlbl.Margin = new Padding(6, 0, 6, 0);
 			registerlbl.Name = "registerlbl";
 			registerlbl.Size = new System.Drawing.Size(125, 41);
@@ -93,8 +93,8 @@ namespace Mera.Quiz.UI
 			// 
 			// loginbtn
 			// 
-			loginbtn.Location = new System.Drawing.Point(521, 912);
-			loginbtn.Margin = new Padding(6, 6, 6, 6);
+			loginbtn.Location = new System.Drawing.Point(219, 544);
+			loginbtn.Margin = new Padding(6);
 			loginbtn.Name = "loginbtn";
 			loginbtn.Size = new System.Drawing.Size(187, 90);
 			loginbtn.TabIndex = 5;
@@ -105,28 +105,29 @@ namespace Mera.Quiz.UI
 			// pictureBox1
 			// 
 			pictureBox1.Image = Properties.Resources.GRqoSib7eDiGGTL_Quiz_Logo_PNG_HD;
-			pictureBox1.Location = new System.Drawing.Point(6, 6);
-			pictureBox1.Margin = new Padding(6, 6, 6, 6);
+			pictureBox1.Location = new System.Drawing.Point(15, 15);
+			pictureBox1.Margin = new Padding(6);
 			pictureBox1.Name = "pictureBox1";
-			pictureBox1.Size = new System.Drawing.Size(1239, 543);
+			pictureBox1.Size = new System.Drawing.Size(579, 287);
 			pictureBox1.TabIndex = 6;
 			pictureBox1.TabStop = false;
 			// 
 			// label1
 			// 
 			label1.AutoSize = true;
-			label1.Location = new System.Drawing.Point(565, 1031);
+			label1.Location = new System.Drawing.Point(263, 663);
 			label1.Margin = new Padding(6, 0, 6, 0);
 			label1.Name = "label1";
 			label1.Size = new System.Drawing.Size(86, 41);
 			label1.TabIndex = 7;
 			label1.Text = "- or -";
+			label1.Click += label1_Click;
 			// 
 			// LoginForm
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new System.Drawing.Size(1241, 1275);
+			ClientSize = new System.Drawing.Size(643, 835);
 			Controls.Add(label1);
 			Controls.Add(pictureBox1);
 			Controls.Add(loginbtn);
@@ -135,7 +136,7 @@ namespace Mera.Quiz.UI
 			Controls.Add(passwordlbl);
 			Controls.Add(usernamelbl);
 			Controls.Add(usernametxt);
-			Margin = new Padding(6, 6, 6, 6);
+			Margin = new Padding(6);
 			Name = "LoginForm";
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "LoginForm";

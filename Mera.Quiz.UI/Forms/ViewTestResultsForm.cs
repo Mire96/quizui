@@ -36,16 +36,24 @@ namespace Mera.Quiz.UI.Forms
 			}
 		}
 
-		private void downloadPdfBtn_Click(object sender, EventArgs e)
+		private async void downloadPdfBtn_Click(object sender, EventArgs e)
 		{
-			if (testResultListBox.SelectedItem != null)
+			try
 			{
-				TestScoreModel.DownloadTestResultPDF((TestScoreModel)testResultListBox.SelectedItem);
-				MessageBox.Show("Test result downloaded successfully");
+				if (testResultListBox.SelectedItem != null)
+				{
+					var testResult = (TestScoreModel)testResultListBox.SelectedItem;
+					await APICalls.DownloadTestResult(testResult.ID);
+				}
+				else
+				{
+					MessageBox.Show("You must select a test result to download it's pdf");
+				}
 			}
-			else
+			catch (Exception except)
 			{
-				MessageBox.Show("You must select a test result to download it's pdf");
+
+				MessageBox.Show("Failed to download test result", "Test result pdf", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
 		}

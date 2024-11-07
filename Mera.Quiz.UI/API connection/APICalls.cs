@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -29,24 +30,62 @@ namespace Mera.Quiz.UI.API_connection
 				throw new Exception(response.ReasonPhrase);
 			}
 		}
+		internal static async Task<int> CreateTestScore(TestScoreModel testScoreModel)
+		{
+			string url = $"api/Test/Score";
+			string testJson = JsonConvert.SerializeObject(testScoreModel);
+
+			var content = new StringContent(testJson, Encoding.UTF8, "application/json");
+
+			using (HttpResponseMessage response = await APIHandler.client.PostAsync(url, content))
+			{
+				if (response.IsSuccessStatusCode)
+				{
+					int createdTestScore = await response.Content.ReadAsAsync<int>();
+					return createdTestScore;
+				}
+				string errorMessage = await response.Content.ReadAsStringAsync();
+				throw new Exception($"{errorMessage}");
+			}
+		}
+		public static async Task DownloadTestResultPDF(int testScoreId)
+        {
+            string url = $"api/Test/score/download/{testScoreId}";
+
+            using (HttpResponseMessage response = await APIHandler.client.GetAsync(url)) 
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var bytes = await response.Content.ReadAsByteArrayAsync();
+
+                    SaveFileDialog saveFileDialog = new SaveFileDialog
+					{
+						Filter = "Pdf file (*.pdf)|*.pdf|All Files (*.*)|*.*",
+						Title = "Save Test Result as a PDF File",
+					};
+
+					if (saveFileDialog.ShowDialog() == DialogResult.OK)
+					{
+						string filePath = saveFileDialog.FileName;
+
+						File.WriteAllBytes(filePath, bytes);
+						MessageBox.Show("Test result downloaded successfully");
+                    }
+                    else
+                    {
+						MessageBox.Show("Cancelled Test result downloaded");
+					}
+
+
+					return;
+                }
+            }
+
+		}
 
 		#endregion
 
 
-		public static async Task<List<TestModel>> GetTests()
-        {
-            string url = $"api/Test";
-
-            using (HttpResponseMessage response = await APIHandler.client.GetAsync(url))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    var test = await response.Content.ReadAsAsync<List<TestModel>>();
-                    return test;
-                }
-                throw new Exception(response.ReasonPhrase);
-            }
-        }
         #region User API
         public static async Task<UserModel> LoginUser(UserModel userModel)
         {
@@ -63,8 +102,9 @@ namespace Mera.Quiz.UI.API_connection
                     MessageBox.Show($"{userLogin.UserName} logged in successfuly as {userLogin.Role}", "Quiz login", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return userLogin;
                 }
-                throw new Exception(response.ReasonPhrase);
-            }
+				string errorMessage = await response.Content.ReadAsStringAsync();
+				throw new Exception($"{errorMessage}");
+			}
         }
 
 
@@ -83,13 +123,29 @@ namespace Mera.Quiz.UI.API_connection
                     MessageBox.Show($"{userLogin.UserName} registered successfuly as {userLogin.Role}", "Quiz register", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return userLogin;
                 }
-                throw new Exception(response.ReasonPhrase);
+                string errorMessage = await response.Content.ReadAsStringAsync();
+                throw new Exception($"{errorMessage}");
             }
         }
 
-        #endregion
+		#endregion
 
-        internal static async Task DeleteTest(object selectedItem)
+		public static async Task<List<TestModel>> GetTests()
+		{
+			string url = $"api/Test";
+
+			using (HttpResponseMessage response = await APIHandler.client.GetAsync(url))
+			{
+				if (response.IsSuccessStatusCode)
+				{
+					var test = await response.Content.ReadAsAsync<List<TestModel>>();
+					return test;
+				}
+				throw new Exception(response.ReasonPhrase);
+			}
+		}
+
+		internal static async Task DeleteTest(object selectedItem)
         {
             TestModel deleteTest = (TestModel)selectedItem;
             string url = $"api/Test/{deleteTest.ID}";
@@ -101,8 +157,9 @@ namespace Mera.Quiz.UI.API_connection
                     MessageBox.Show($"{deleteTest} deleted successfully", "Test deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                throw new Exception(response.ReasonPhrase);
-            }
+				string errorMessage = await response.Content.ReadAsStringAsync();
+				throw new Exception($"{errorMessage}");
+			}
         }
 
 
@@ -121,27 +178,12 @@ namespace Mera.Quiz.UI.API_connection
                     MessageBox.Show("Question valid!");
                     return validatedQuestion;
                 }
-                throw new Exception(response.ReasonPhrase);
-            }
+				string errorMessage = await response.Content.ReadAsStringAsync();
+				throw new Exception($"{errorMessage}");
+			}
         }
 
-        internal static async Task<int> CreateTestScore(TestScoreModel testScoreModel)
-        {
-            string url = $"api/Test/Score";
-            string testJson = JsonConvert.SerializeObject(testScoreModel);
-
-            var content = new StringContent(testJson, Encoding.UTF8, "application/json");
-
-            using (HttpResponseMessage response = await APIHandler.client.PostAsync(url, content))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    int createdTestScore = await response.Content.ReadAsAsync<int>();
-                    return createdTestScore;
-                }
-                throw new Exception(response.ReasonPhrase);
-            }
-        }
+        
 
         internal static async Task<TestModel> CreateTest(TestModel test)
         {
@@ -158,8 +200,9 @@ namespace Mera.Quiz.UI.API_connection
                     MessageBox.Show($"{createdTest.TestName} was created!");
                     return createdTest;
                 }
-                throw new Exception(response.ReasonPhrase);
-            }
+				string errorMessage = await response.Content.ReadAsStringAsync();
+				throw new Exception($"{errorMessage}");
+			}
         }
         //Refactor this code
         internal static async Task<TestModel> UpdateTest(TestModel test)
@@ -177,8 +220,9 @@ namespace Mera.Quiz.UI.API_connection
                     MessageBox.Show($"{createdTest.TestName} was successfully updated!");
                     return createdTest;
                 }
-                throw new Exception(response.ReasonPhrase);
-            }
+				string errorMessage = await response.Content.ReadAsStringAsync();
+				throw new Exception($"{errorMessage}");
+			}
         }
     }
 }
