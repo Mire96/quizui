@@ -30,7 +30,7 @@ namespace Mera.Quiz.UI.API_connection
 				throw new Exception(response.ReasonPhrase);
 			}
 		}
-		internal static async Task<int> CreateTestScore(TestScoreModel testScoreModel)
+		internal static async Task<TestScoreModel> CreateTestScore(TestScoreModel testScoreModel)
 		{
 			string url = $"api/Test/Score";
 			string testJson = JsonConvert.SerializeObject(testScoreModel);
@@ -41,7 +41,7 @@ namespace Mera.Quiz.UI.API_connection
 			{
 				if (response.IsSuccessStatusCode)
 				{
-					int createdTestScore = await response.Content.ReadAsAsync<int>();
+					TestScoreModel createdTestScore = await response.Content.ReadAsAsync<TestScoreModel>();
 					return createdTestScore;
 				}
 				string errorMessage = await response.Content.ReadAsStringAsync();
