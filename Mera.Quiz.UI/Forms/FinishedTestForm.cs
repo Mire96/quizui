@@ -14,6 +14,7 @@ using PdfSharpCore;
 using PdfSharpCore.Pdf;
 using PdfSharpCore.Drawing;
 using System.IO;
+using Mera.Quiz.UI.API_connection;
 
 namespace Mera.Quiz.UI.Forms
 {
@@ -35,8 +36,7 @@ namespace Mera.Quiz.UI.Forms
 
 		private async void button1_Click(object sender, EventArgs e)
 		{
-			//GenerateTestResultPDF(testScore);
-			TestScoreModel.DownloadTestResultPDF(testScore);
+			await APICalls.DownloadTestResultPDF(testScore.ID);
 			MessageBox.Show("Test downloaded successfully");
 			this.Close();
 		}

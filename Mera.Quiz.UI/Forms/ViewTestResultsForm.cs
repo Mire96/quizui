@@ -43,7 +43,7 @@ namespace Mera.Quiz.UI.Forms
 				if (testResultListBox.SelectedItem != null)
 				{
 					var testResult = (TestScoreModel)testResultListBox.SelectedItem;
-					await APICalls.DownloadTestResult(testResult.ID);
+					await APICalls.DownloadTestResultPDF(testResult.ID);
 				}
 				else
 				{
